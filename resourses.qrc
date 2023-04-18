@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fonts/Roboto-Italic.ttf</file>
+        <file>fonts/Roboto-Light.ttf</file>
+        <file>fonts/Roboto-Medium.ttf</file>
+        <file>fonts/Roboto-MediumItalic.ttf</file>
+        <file>fonts/Roboto-Regular.ttf</file>
+        <file>fonts/Roboto-Thin.ttf</file>
+        <file>images/power_on.png</file>
+        <file>MessageBoxPict/critical.png</file>
+        <file>MessageBoxPict/warning.png</file>
+    </qresource>
+</RCC>
