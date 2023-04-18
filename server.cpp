@@ -19,15 +19,7 @@ Server::Server()
 
     connectToDataBase();
 
-    QSqlQuery query;
-    query.exec("SELECT Login FROM users");
-    QString Login;
-    while(query.next())
-    {
-        Login =  query.value(0).toString();
-        OfflineVector.push_back(Login);
-    }
-
+    loadDataFromDB();
 }
 
 void Server::start()
@@ -782,80 +774,18 @@ void Server::backup()
     worker->startBackup(dialogs, logs);
 }
 
-/*void Server::LoadData()
+void Server::loadDataFromDB()
 {
-    quint16 size;
-    quint16 MsgHsrSize;
-    QByteArray Text;
-    qDebug() << "load started!";
-    QFile dataFile("D:/ServerData/Data.txt");
-    if(!dataFile.exists())
+    QSqlQuery query;
+    query.exec("SELECT Login FROM users");
+    QString Login;
+    while(query.next())
     {
-        qDebug() << "file not exists";
-        return;
+        Login =  query.value(0).toString();
+        OfflineVector.push_back(Login);
     }
+}
 
-    if(!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "file error";
-        return;
-    }
-
-    dataFile.seek(0);
-    Text.clear();
-    Text = dataFile.readLine();
-    size = QString::fromUtf8(Text).toInt();
-    Text = dataFile.readLine();
-    for(int i = 0; i < size; i++)
-    {
-        Text.clear();
-        Text = dataFile.readLine();
-        QString firstUser = QString::fromUtf8(Text).remove("\n");
-        Text.clear();
-        Text = dataFile.readLine();
-        QString secondUser = QString::fromUtf8(Text).remove("\n");
-        PrivateDialog* dialog = new PrivateDialog(firstUser, secondUser);
-        PrivateDialogVector.push_back(dialog);
-        Text.clear();
-        Text = dataFile.readLine();
-        MsgHsrSize = QString::fromUtf8(Text).toInt();
-        for(int j = 0; j < MsgHsrSize; j++)
-        {
-            Text.clear();
-            Text = dataFile.readLine();
-            QString msg = QString::fromUtf8(Text).remove("\n");
-            dialog->pushNewMessage(msg);
-        }
-        Text = dataFile.readLine();
-    }
-
-    dataFile.close();
-
-    QFile logFile("D:/ServerData/Logs.txt");
-    if(!logFile.exists())
-    {
-        qDebug() << "file not exists";
-        return;
-    }
-    if(!logFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "file error";
-        return;
-    }
-    logFile.seek(0);
-    Text.clear();
-    Text = logFile.readLine();
-    size = QString::fromUtf8(Text).toInt();
-    Text = logFile.readLine();
-    for(int i = 0; i < size; i++)
-    {
-        Text.clear();
-        Text = logFile.readLine();
-        QString msg = QString::fromUtf8(Text).remove("\n");
-        LogVector.push_back(msg);
-        emit signalNewAction(msg);
-    }
-}*/
 
 void Server::clientDisconnected(QAbstractSocket::SocketState socketState)
 {

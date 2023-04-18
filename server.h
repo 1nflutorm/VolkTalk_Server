@@ -87,6 +87,7 @@ private:
     void deleteChat(const QString& RoomName);
     void addLog(const QString& log);
     void backup();
+    void loadDataFromDB();
     User* FindUser(const QString& Login);
     PrivateDialog* findDialog(const QString& user_1, const QString& user_2);
     GroupChat* findChat(const QString& GroupName);
