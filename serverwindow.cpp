@@ -57,6 +57,7 @@ void ServerWindow::slotAddOfflineUsers(QVector<QString> OfflineVector)
     {
         QListWidgetItem *item = new QListWidgetItem(ui->UsersWidget);
         item->setText(OfflineVector[i]);
+
         item->setForeground(Qt::lightGray);
     }
     ui->UsersWidget->sortItems(Qt::AscendingOrder);
