@@ -586,7 +586,7 @@ bool Server::connectToDataBase()
     db.setHostName("127.0.0.1");
     db.setDatabaseName("Volk_Talk_Users");
     db.setUserName("postgres");
-    db.setPassword("V1o2l3k4o5v");
+    db.setPassword("");
     if (!db.open())
     {
         qDebug() << db.lastError().text();
